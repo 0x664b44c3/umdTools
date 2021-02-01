@@ -15,7 +15,7 @@ void tslLogger::onTSLMessage(int addr, QString text, int tally, int brightness)
 	{
 		QString out;
 		out += QDateTime::currentDateTimeUtc()
-		       .toString("yyyy-MM-dd HH:mm:ss+zzz");
+		       .toString("yyyy-MM-dd HH:mm:ss.zzz");
 		out +=";";
 		out += QString::asprintf("%03d;%01d;%s%s%s%s;",
 		                         addr, brightness,
@@ -31,7 +31,7 @@ void tslLogger::onTSLMessage(int addr, QString text, int tally, int brightness)
 		if (mShowTS)
 			std::cout << "["
 			          << QDateTime::currentDateTimeUtc().toString(
-			                 "yyyy-MM-dd HH:mm:ss+zzz").toStdString()
+			                 "yyyy-MM-dd HH:mm:ss.zzz").toStdString()
 			          << "] ";
 		std::cout << "A" << std::setw(3) << std::setfill('0') << addr;
 		std::cout << " B" << std::setw(1) << brightness;

@@ -154,7 +154,15 @@ QByteArray TSL::assembleMessage(int addr, QString text, int tally, int brightnes
 	QByteArray textData = text.toLatin1();
 	while(textData.size() < 16)
 		textData.append(' ');
-	packet.push_back(textData.left(16));
+	//limit to safe character set
+	for(int i=0;i<16;++i)
+	{
+		unsigned char c = textData[i]&0x7f;
+		if ((c>=31) && (c<128))
+			packet.push_back(c);
+		else
+			packet.push_back(' ');
+	}
 	return packet;
 }
 
